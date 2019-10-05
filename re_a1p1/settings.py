@@ -32,13 +32,16 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'account.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'REprop'
+    'REprop',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -132,6 +135,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL = '/home'
 
 # Extra places for collectstatic to find static files.
 
@@ -150,6 +155,14 @@ DATABASES['default'] = dj_database_url.config()
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '5ee7fa46d48ca8'
+EMAIL_HOST_PASSWORD = '82444f42d6168e'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
 
 try:
     from .local_settings import *

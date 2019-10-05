@@ -15,6 +15,7 @@ type = (
 
 # Customer Model
 class Customer(models.Model):
+
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=50)
@@ -37,20 +38,20 @@ class Customer(models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.id)
+        return str(self.name)
 
 
 # Properties Model
-class Property (models.Model):
+class Property(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='customers')
-    prop_number = models.CharField(max_length=50)
+    prop_number = models.IntegerField(max_length=50, primary_key= True)
     type = models.CharField(max_length=20, choices=type, default='Condo', blank=False)
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     zipcode = models.CharField(max_length=10)
     squarefeet = models.CharField(max_length=50)
-    price = models.IntegerField()
+    price = models.IntegerField(max_length=50)
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
     bed = models.CharField(max_length=50)
     bath = models.CharField(max_length=50)
@@ -71,6 +72,6 @@ class Property (models.Model):
         self.save()
 
     def __str__(self):
-        return str(self.id)
+        return str(self.prop_number)
 
 

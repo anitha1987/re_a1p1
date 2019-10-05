@@ -1,0 +1,50 @@
+{% extends 'REprop/base.html' %}
+{% load staticfiles %}
+{% block content %}
+            {% if user.is_authenticated %}
+                <div class="page-container">
+
+                    <h2 class="top-menu">Hello {{ user.username }},</h2>
+                    <p>Please choose from below options.</p>
+
+                </div>
+            {% endif %}
+            <div class="content container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="links">
+                            <!-- Example row of columns -->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="thumbnail">
+                                        <img src="{% static "images/customer.JPG" %}" alt="customer"/>
+                                        <div class="caption">
+                                            <h2>Customer</h2>
+                                            <p>We see our success in our customers success!!</p>
+                                            <p><a class="btn btn-primary" href="{% url 'REprop:customer_list' %}"
+                                                  role="button">View
+                                                details &raquo;</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="thumbnail">
+                                        <img src="{% static "images/property.JPG" %}" alt="property"/>
+                                        <div class="caption">
+                                            <h2>Properties</h2>
+                                            <p>Property details are provided here!</p>
+                                            <p><a class="btn btn-primary" href="{% url 'REprop:property_list' %}"
+                                                  role="button">View
+                                                details &raquo;</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </body>
+    </html>
+{% endblock %}
