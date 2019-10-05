@@ -43,6 +43,23 @@ def customer_delete(request, pk):
    customer.delete()
    return redirect('REprop:customer_list')
 
+# customer_Add
+@login_required
+def customer_new(request):
+   if request.method == "POST":
+       form = CustomerForm(request.POST)
+       if form.is_valid():
+           customer = form.save(commit=False)
+           customer.created_date = timezone.now()
+           customer.save()
+           customer = Customer.objects.filter(created_date__lte=timezone.now())
+           return render(request, 'REprop/customer_list.html',
+                         {'customers': customer})
+   else:
+       form = CustomerForm()
+       # print("Else")
+   return render(request, 'REprop/customer_new.html', {'form': form})
+
 # property_list
 @login_required
 def property_list(request):
@@ -76,6 +93,25 @@ def property_delete(request, pk):
    property.delete()
    return redirect('REprop:property_list')
 
+# Property_Add
+@login_required
+def property_new(request):
+   if request.method == "POST":
+       form = PropertyForm(request.POST)
+       if form.is_valid():
+           property = form.save(commit=False)
+           property.created_date = timezone.now()
+           property.save()
+           propertys = Property.objects.filter(created_date__lte=timezone.now())
+           return render(request, 'REprop/property_list.html',
+                         {'propertys': propertys})
+   else:
+       form = PropertyForm()
+       # print("Else")
+   return render(request, 'REprop/property_new.html', {'form': form})
+
+
+# Property_Summary
 @login_required
 def property_summary(request, pk):
     customers = get_object_or_404(Customer, pk=pk)
