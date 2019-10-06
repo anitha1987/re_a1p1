@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render, get_object_or_404
 from .models import *
 from .forms import *
+from django.utils import timezone
 
 now = timezone.now()
 def home(request):
@@ -114,8 +115,8 @@ def property_new(request):
 # Property_Summary
 @login_required
 def property_summary(request, pk):
-    customers = get_object_or_404(Customer, pk=pk)
+    customer = get_object_or_404(Customer, pk=pk)
     customers = Customer.objects.filter(created_date__lte=timezone.now())
-    propertys = Property.objects.filter(pk=pk)
+    propertys = Property.objects.filter(customer=pk)
     return render(request, 'REprop/property_summary.html', {'customers': customers,
-                                                    'propertys': propertys,})
+                                                    'propertys':propertys})
